@@ -81,7 +81,7 @@ export default function Dashboard() {
         )}
 
        
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {products.map((pro) => (
               <div key={pro._id} className="p-4 border border-gray-300 rounded shadow">
                 {pro.thumbnail? (<>
@@ -90,7 +90,7 @@ export default function Dashboard() {
                   height={200}
                   width={200}
                   alt={pro.name}
-                  className="object-cover"
+                  className="object-cover w-full"
                 />
                 </>):(
                     <><p>No Image</p></>
@@ -99,7 +99,7 @@ export default function Dashboard() {
                 <p className="font-bold mt-2">{pro.name}</p>
                 <p><b>Price:</b> ${pro.price}</p>
                 <p><b>Category:</b> {pro.category}</p>
-                <p><b>Description:</b> {pro.description.slice(0,30)}{(pro.description.length ?? 0 ) > 100 ? "...": ""}</p>
+                <p><b>Description:</b> {pro.description.slice(0,50)}{(pro.description.length ?? 0 ) > 100 ? "...": ""}</p>
                 
                  {role === "admin" && (
                   <div className="grid grid-cols-2 gap-2 mt-2">
