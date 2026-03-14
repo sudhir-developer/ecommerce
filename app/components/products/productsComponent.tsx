@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 interface Products{
   _id:string,
-  title:string,
+  name:string,
   price:number,
   category:string,
   description:string,
@@ -47,7 +47,7 @@ export default function ProductsComponent(){
     <ProductCard 
      key={pro._id}
      _id={pro._id}
-     title={pro.title}
+     title={pro.name}
      price={pro.price}
      category={pro.category}
      thumbnail={pro.thumbnail}
