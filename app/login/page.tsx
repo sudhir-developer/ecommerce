@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function LoginPage() {
 
   const [email,setEmail] = useState("");
@@ -8,6 +9,16 @@ export default function LoginPage() {
   const [message,setMessage] = useState("");
   const [type,setType] = useState("");
   const router = useRouter();
+
+
+  useEffect(() => {
+    fetch("/api/showusername")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) router.push("/dashboard"); // already logged in hai toh dashboard pe bhejo
+      });
+  }, []);
+
 
   const handleSubmit = async (e:any)=>{
     e.preventDefault();
@@ -84,7 +95,9 @@ export default function LoginPage() {
           </button>
 
         </form>
-
+        <Link href="/forgot-password" className="text-sm text-blue-500 underline">
+          Forgot Password?
+        </Link>
       </div>
 
     </div>

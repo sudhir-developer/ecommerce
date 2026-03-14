@@ -81,7 +81,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
          
            {isLoggedIn ? (
   <div className="flex items-center gap-3">
-    <span className="font-medium">Hi, {userName}!</span>
+    <span className="font-medium rounded-lg p-2 bg-green-300">Hi, {userName}!</span>
     <button
       onClick={handleLogout}
       className="bg-red-500 text-white px-4 py-2 rounded"
