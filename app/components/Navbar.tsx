@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userName, setUserName] = useState("");
   const router = useRouter();
 
@@ -24,7 +23,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   const handleLogout = async () => {
     await fetch("/api/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/");
     router.refresh();
   };
 
@@ -40,8 +39,8 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
           {/* Products Dropdown */}
           <div className="relative group">
-            <button className="cursor-pointer">Products</button>
-            <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded w-40 z-50">
+            <button className="cursor-pointer">Products ▾</button>
+            <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded p-3 w-50 z-50">
               <Link href="/products/" className="block px-4 py-2 hover:bg-gray-100">Decore Items</Link>
               <Link href="/products/lighting" className="block px-4 py-2 hover:bg-gray-100">Lighting</Link>
               <Link href="/products/decor" className="block px-4 py-2 hover:bg-gray-100">Decor</Link>
@@ -51,41 +50,35 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           {/* Cart */}
           <div className="relative group">
             <button className="cursor-pointer"><FiShoppingCart /></button>
-            <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded w-40 z-50">
+            <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded w-50 z-50">
               <div className="p-3">Cart is empty</div>
             </div>
           </div>
 
           {/* User Dropdown */}
           {isLoggedIn ? (
-            <div className="relative">
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="font-medium rounded-lg p-2 bg-green-200"
-              >
-                Hi, {userName}! ▾
-              </button>
-              {dropdownOpen && (
-                <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-50">
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setDropdownOpen(false)}
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => { setDropdownOpen(false); handleLogout(); }}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <Link href="/login" className="bg-black text-white px-4 py-2 rounded">Login</Link>
-          )}
+  <div className="relative group">
+    <button className="font-medium rounded-lg p-2 bg-green-200 cursor-pointer">
+      Hi, {userName}! ▾
+    </button>
+    <div className="absolute right-0 top-full hidden group-hover:block bg-white border rounded-lg shadow-lg p-3 w-50 z-50">
+      <Link
+        href="/dashboard"
+        className="block px-4 py-2 hover:bg-gray-100"
+      >
+        Dashboard
+      </Link>
+      <button
+        onClick={handleLogout}
+        className="block w-full text-left cursor-pointer px-4 py-2 hover:bg-gray-100 text-red-500"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+) : (
+  <Link href="/login" className="bg-black text-white px-4 py-2 rounded">Login</Link>
+)}
 
           {!isLoggedIn && (
             <Link href="/signup" className="bg-black text-white px-4 py-2 rounded">Sign Up</Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import ProductCard from "../ProductCard";
 interface Products{
   _id:string,
@@ -13,6 +14,8 @@ interface Products{
 export default function ProductsComponent(){
     const [products, setProducts] = useState<Products[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
+    const [search, setSearch] = useState("");
+    const [debounceSearch, setDebounceSearch] = useState("");
   
     useEffect(() => {
       const fetchProducts = async () => {
@@ -37,6 +40,22 @@ export default function ProductsComponent(){
   
       fetchProducts();
     }, []);
+
+
+useEffect(()=>{
+  const timer = setTimeout(()=>{
+    setDebounceSearch(search);
+  },500);
+  return ()=>clearTimeout(timer);
+}, [search])
+
+
+  const searchData = products.filter(item=>
+    item.name.toLowerCase().includes(debounceSearch.toLowerCase()) ||  item.price.toString().includes(debounceSearch.toLowerCase())
+  );
+
+
+
     return(
         <>
         <div className="max-w-7xl mx-auto px-4 py-16">
@@ -60,21 +79,29 @@ export default function ProductsComponent(){
       Premium interior products curated for modern homes. Explore our latest collection.
     </p>
     <div className="flex gap-4">
-      <button className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+      <Link href="/products" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
         Shop Now
-      </button>
-      <button className="border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition">
+      </Link>
+      <Link href="/products" className="border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition">
         View Collection
-      </button>
+      </Link>
     </div>
   </div>
-
+</div>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-10">
+   <div>
+     <b>Search:</b> <br/><input type="text" value={search} placeholder="Search by name or price..." onChange={(e)=>setSearch(e.target.value)} className="border border-gray-100 p-3 rounded-lg w-full max-w-md shadow-sm"/> 
+  </div>
 </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-    {loading? (<p>Loading</p>):(<>
 
-    {products?.map((pro)=>(
+
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+    {loading? (<p>Loading</p>
+  ): searchData.length === 0 ? (
+    <p className="text-gray-500">No products found.</p>
+  ) : (<>
+    {searchData?.map((pro)=>(
     <ProductCard 
      key={pro._id}
      _id={pro._id}

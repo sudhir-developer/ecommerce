@@ -2,10 +2,16 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Product from "@/models/Product";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const limit = parseInt(searchParams.get("limit") || "0");
+
     await connectDB();
-    const products = await Product.find();
+    const products = limit
+      ? await Product.find().sort({ createdAt: -1 }).limit(limit)
+      : await Product.find().sort({ createdAt: -1 });
+
     return NextResponse.json({ products });
   } catch (err) {
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

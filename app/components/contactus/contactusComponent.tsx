@@ -12,16 +12,26 @@ export default function ContactUs() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setStatus("Sending...");
-
-    // API call yahan add kar sakte ho baad mein
-    setTimeout(() => {
+  
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, subject, message }),
+    });
+  
+    const data = await res.json();
+  
+    if (res.ok) {
       setIsError(false);
-      setStatus("Message sent successfully! We will get back to you soon.");
+      setStatus(data.message);
       setName("");
       setEmail("");
       setSubject("");
       setMessage("");
-    }, 1000);
+    } else {
+      setIsError(true);
+      setStatus(data.error);
+    }
   };
 
   return (

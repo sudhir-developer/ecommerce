@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @source "../components/**/*.{js,ts,jsx,tsx}";
 
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -27,11 +30,19 @@ body {
 }
 
 .bg-green-100 { background-color: #dcfce7; }
-  .bg-green-200 { background-color: #bbf7d0; }
-  .bg-green-300 { background-color: #86efac; }
-  .bg-green-400 { background-color: #4ade80; }
-  .bg-green-500 { background-color: #22c55e; }
-  .bg-green-600 { background-color: #16a34a; }
-  .bg-green-700 { background-color: #15803d; }
-  .bg-green-800 { background-color: #166534; }
-  .bg-green-900 { background-color: #14532d; }
+.bg-green-200 { background-color: #bbf7d0; }
+.bg-green-300 { background-color: #86efac; }
+.bg-green-400 { background-color: #4ade80; }
+.bg-green-500 { background-color: #22c55e; }
+.bg-green-600 { background-color: #16a34a; }
+.bg-green-700 { background-color: #15803d; }
+.bg-green-800 { background-color: #166534; }
+.bg-green-900 { background-color: #14532d; }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-      <footer className="bg-black text-white mt-20">
+      <footer className="bg-black text-white">
         <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
   
           {/* Logo / About */}
@@ -15,10 +15,10 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>Home</li>
-              <li>Products</li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/products">Products</a></li>
               <li>Cart</li>
-              <li>Login</li>
+              <li><a href="/login">Login</a></li>
             </ul>
           </div>
   
