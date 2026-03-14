@@ -6,14 +6,42 @@ export default function AboutUs() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       
-      {/* Hero Section */}
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4">About InteriorStore</h1>
-        <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-          We believe that every home deserves to be beautiful. Our mission is to bring
-          premium interior products to every household at affordable prices.
-        </p>
-      </div>
+     {/* About Us Banner */}
+<div className="relative bg-black text-white py-16 px-8 rounded-2xl mb-12 overflow-hidden">
+
+{/* Background Pattern */}
+<div className="absolute inset-0 opacity-10">
+  <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/3 -translate-y-1/3"></div>
+  <div className="absolute bottom-0 right-0 w-72 h-72 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+  <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+</div>
+
+{/* Content */}
+<div className="relative z-10 text-center max-w-2xl mx-auto">
+  <p className="text-gray-400 text-sm uppercase tracking-widest mb-3">Our Story</p>
+  <h1 className="text-4xl md:text-5xl font-bold mb-4">
+    About <span className="text-yellow-400">InteriorStore</span>
+  </h1>
+  <p className="text-gray-300 text-lg mb-8">
+    Hum har ghar ko sundar banana chahte hain. Premium quality, affordable prices.
+  </p>
+  <div className="flex justify-center gap-8 flex-wrap">
+    <div className="text-center">
+      <p className="text-3xl font-bold text-yellow-400">5000+</p>
+      <p className="text-gray-400 text-sm">Happy Customers</p>
+    </div>
+    <div className="text-center">
+      <p className="text-3xl font-bold text-yellow-400">200+</p>
+      <p className="text-gray-400 text-sm">Products</p>
+    </div>
+    <div className="text-center">
+      <p className="text-3xl font-bold text-yellow-400">4.8★</p>
+      <p className="text-gray-400 text-sm">Average Rating</p>
+    </div>
+  </div>
+</div>
+
+</div>
 
       {/* Our Story */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">

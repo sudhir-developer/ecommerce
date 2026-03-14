@@ -40,10 +40,10 @@ export default function HomeProductComponent(){
     }, []);
     return(
         <>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
     {loading? (<p>Loading</p>):(<>
 
-    {products?.slice(0,3).map((pro)=>(
+    {products?.slice(0,8).map((pro)=>(
     <ProductCard 
      key={pro._id}
      _id={pro._id}
@@ -51,7 +51,7 @@ export default function HomeProductComponent(){
      price={pro.price}
      category={pro.category}
      thumbnail={pro.thumbnail}
-     pro_description={pro.description}
+     pro_description={pro.description? pro.description?.slice(0,40) + (pro.description?.length > 40 ? "...":""):""}
     />
   ))}
   </>)}
