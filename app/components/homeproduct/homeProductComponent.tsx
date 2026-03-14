@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 interface Products{
   _id:string,
-  title:string,
+  name:string,
   price:number,
   category:string,
   description:string,
@@ -40,13 +40,14 @@ export default function HomeProductComponent(){
     }, []);
     return(
         <>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
     {loading? (<p>Loading</p>):(<>
 
-    {products?.slice(0,8).map((pro)=>(
+    {products?.slice(0,3).map((pro)=>(
     <ProductCard 
      key={pro._id}
-     title={pro.title}
+     _id={pro._id}
+     title={pro.name}
      price={pro.price}
      category={pro.category}
      thumbnail={pro.thumbnail}
