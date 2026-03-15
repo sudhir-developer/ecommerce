@@ -71,7 +71,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="container max-w-7xl mx-auto p-4">
+      <div className="container max-w-7xl mx-auto p-4 mb-20">
         <h1 className="text-2xl font-bold mb-4">Welcome to Dashboard</h1>
 
         {loading && <p>Loading products...</p>}
@@ -81,9 +81,9 @@ export default function Dashboard() {
         )}
 
        
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {products.map((pro) => (
-              <div key={pro._id} className="p-4 border border-gray-300 rounded shadow">
+              <div key={pro._id} className="p-6 border border-gray-300 rounded shadow">
                 {pro.thumbnail? (<>
                     <Image
                   src={pro.thumbnail}
@@ -105,13 +105,13 @@ export default function Dashboard() {
                   <div className="grid grid-cols-2 gap-2 mt-2">
                   <Link
                     href={`/dashboard/edit-product/${pro._id}`}
-                    className="bg-blue-500 text-white px-3 py-1 rounded text-center"
+                    className="bg-sky-500 text-white px-3 py-1 rounded text-center"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => handleDelete(pro._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
+                    className="bg-zinc-500 text-white px-3 py-1 rounded"
                   >
                     Delete
                   </button>

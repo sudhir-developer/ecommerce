@@ -13,7 +13,7 @@ export default function ProductCard({_id, title, price, category,pro_description
     return(
         <>
          <Link href={`/products/${_id}`}>
-        <div className="border border-gray-300  rounded-lg p-4 hover:shadow-lg">
+        <div className="border border-gray-300  rounded-lg p-6 hover:shadow-lg">
         {thumbnail ? (
         <Image
           src={thumbnail}
