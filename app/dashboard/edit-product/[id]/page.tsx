@@ -13,6 +13,7 @@ export default function EditProductPage() {
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [images, setImages] = useState<File[]>([]);
   const [message, setMessage] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
 
   useEffect(() => {
     if (!id) return;
@@ -26,6 +27,7 @@ export default function EditProductPage() {
         setCategory(p.category || "");
         setDescription(p.description || "");
         setExistingImages(p.images || []);
+        setThumbnail(data.product.thumbnail || "");
         setLoading(false);
       });
   }, [id]);
@@ -58,7 +60,7 @@ export default function EditProductPage() {
       body: JSON.stringify({
         name, price, category, description,
         images: uploadedUrls,
-        thumbnail: uploadedUrls[0],
+        thumbnail: thumbnail || uploadedUrls[0], // selected thumbnail
       }),
     });
 
@@ -70,7 +72,7 @@ export default function EditProductPage() {
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-md mx-auto mt-10 mb-20">
       <h1 className="text-2xl font-bold mb-4">Edit Product</h1>
       {message && <p className="mb-4 p-2 bg-blue-100 rounded">{message}</p>}
 
@@ -84,16 +86,44 @@ export default function EditProductPage() {
         <textarea placeholder="Description" value={description}
           onChange={(e) => setDescription(e.target.value)} className="border p-2 rounded" rows={3} />
 
-        {existingImages.length > 0 && (
-          <div>
-            <p className="text-sm text-gray-500 mb-1">Current Images:</p>
-            <div className="flex gap-2 flex-wrap">
-              {existingImages.map((img, i) => (
-                <img key={i} src={img} width={60} height={60} className="border rounded object-cover" />
-              ))}
-            </div>
-          </div>
-        )}
+{existingImages.length > 0 && (
+  <div>
+    <p className="text-sm font-medium mb-2">Current Images:</p>
+    <div className="flex gap-2 flex-wrap">
+      {existingImages.map((img, i) => (
+        <div key={i} className="relative">
+          
+          {/* Image */}
+          <img
+            src={img}
+            width={80}
+            height={80}
+            className={`rounded border-2 object-cover w-[80px] h-[80px] cursor-pointer ${
+              thumbnail === img ? "border-black" : "border-gray-200"
+            }`}
+            onClick={() => setThumbnail(img)} // thumbnail select
+          />
+
+          {/* X button - delete */}
+          <button
+            type="button"
+            onClick={() => setExistingImages(existingImages.filter((_, idx) => idx !== i))}
+            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+          >
+            ✕
+          </button>
+
+          {/* Thumbnail badge */}
+          {thumbnail === img && (
+            <p className="text-xs text-center mt-1 font-bold">Thumbnail</p>
+          )}
+
+        </div>
+      ))}
+    </div>
+    <p className="text-xs text-gray-400 mt-2">Image click karo thumbnail set karne ke liye</p>
+  </div>
+)}
 
         <input type="file" multiple accept="image/*"
           onChange={(e) => { if (e.target.files) setImages(Array.from(e.target.files)); }}
