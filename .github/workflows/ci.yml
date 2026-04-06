@@ -12,21 +12,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Install Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "npm" # 🔥 faster builds
+          cache: "npm"
 
       - name: Install Dependencies
         run: npm ci
 
       - name: Lint Code
-        run: npm run lint || true # optional
+        run: npm run lint || true
 
       - name: Build Project
         run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
-      # Run tests only if available
       - name: Run Tests
         run: npm test --if-present
