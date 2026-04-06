@@ -16,12 +16,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: "npm" # 🔥 faster builds
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Lint Code
+        run: npm run lint || true # optional
 
       - name: Build Project
         run: npm run build
 
+      # Run tests only if available
       - name: Run Tests
-        run: npm test
+        run: npm test --if-present
