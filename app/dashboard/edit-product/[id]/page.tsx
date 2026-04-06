@@ -44,7 +44,6 @@ export default function EditProductPage() {
         const formData = new FormData();
         formData.append("file", images[i]);
         formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET as string);
-
         const res = await fetch(
           `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
           { method: "POST", body: formData }
@@ -88,12 +87,10 @@ export default function EditProductPage() {
 
 {existingImages.length > 0 && (
   <div>
-    <p className="text-sm font-medium mb-2">Current Images:</p>
+    <p className="text-sm font-bold mb-2">Current Images:</p>
     <div className="flex gap-2 flex-wrap">
       {existingImages.map((img, i) => (
         <div key={i} className="relative">
-          
-          {/* Image */}
           <img
             src={img}
             width={80}
@@ -108,7 +105,7 @@ export default function EditProductPage() {
           <button
             type="button"
             onClick={() => setExistingImages(existingImages.filter((_, idx) => idx !== i))}
-            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+            className="absolute -top-2 -right-2 cursor-pointer font-bold bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
           >
             ✕
           </button>

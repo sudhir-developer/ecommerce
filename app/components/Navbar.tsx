@@ -30,7 +30,9 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold">InteriorStore</Link>
+        <Link href="/" className="text-2xl font-bold">
+          OnlineStore
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-6 items-center">
@@ -41,15 +43,32 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className="relative group">
             <button className="cursor-pointer">Products ▾</button>
             <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded p-3 w-50 z-50">
-              <Link href="/products/" className="block px-4 py-2 hover:bg-gray-100">Decore Items</Link>
-              <Link href="/products/lighting" className="block px-4 py-2 hover:bg-gray-100">Lighting</Link>
-              <Link href="/products/decor" className="block px-4 py-2 hover:bg-gray-100">Decor</Link>
+              <Link
+                href="/products/"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                Decore Items
+              </Link>
+              <Link
+                href="/products/lighting"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                Lighting
+              </Link>
+              <Link
+                href="/products/decor"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                Decor
+              </Link>
             </div>
           </div>
           <Link href="/contactus">Contact Us</Link>
           {/* Cart */}
           <div className="relative group">
-            <button className="cursor-pointer"><FiShoppingCart /></button>
+            <button className="cursor-pointer">
+              <FiShoppingCart />
+            </button>
             <div className="absolute left-0 top-full hidden group-hover:block bg-white border shadow-md rounded w-50 z-50">
               <div className="p-3">Cart is empty</div>
             </div>
@@ -57,31 +76,41 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
           {/* User Dropdown */}
           {isLoggedIn ? (
-  <div className="relative group">
-    <button className="font-medium rounded-lg p-2 bg-green-200 cursor-pointer">
-      Hi, {userName}! ▾
-    </button>
-    <div className="absolute right-0 top-full hidden group-hover:block bg-white border rounded-lg shadow-lg p-3 w-50 z-50">
-      <Link
-        href="/dashboard"
-        className="block px-4 py-2 hover:bg-gray-100"
-      >
-        Dashboard
-      </Link>
-      <button
-        onClick={handleLogout}
-        className="block w-full text-left cursor-pointer px-4 py-2 hover:bg-gray-100 text-red-500"
-      >
-        Logout
-      </button>
-    </div>
-  </div>
-) : (
-  <Link href="/login" className="bg-black text-white px-4 py-2 rounded">Login</Link>
-)}
+            <div className="relative group">
+              <button className="font-medium rounded-lg p-2 bg-green-200 cursor-pointer">
+                Hi, {userName}! ▾
+              </button>
+              <div className="absolute right-0 top-full hidden group-hover:block bg-white border rounded-lg shadow-lg p-3 w-50 z-50">
+                <Link
+                  href="/dashboard"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left cursor-pointer px-4 py-2 hover:bg-gray-100 text-red-500"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="bg-black text-white px-4 py-2 rounded"
+            >
+              Login
+            </Link>
+          )}
 
           {!isLoggedIn && (
-            <Link href="/signup" className="bg-black text-white px-4 py-2 rounded">Sign Up</Link>
+            <Link
+              href="/signup"
+              className="bg-black text-white px-4 py-2 rounded"
+            >
+              Sign Up
+            </Link>
           )}
         </div>
 
@@ -94,8 +123,12 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-3">
-          <Link href="/" className="block">Home</Link>
-          <Link href="/aboutus" className="block">About Us</Link>
+          <Link href="/" className="block">
+            Home
+          </Link>
+          <Link href="/aboutus" className="block">
+            About Us
+          </Link>
 
           {/* Mobile Products */}
           <div>
@@ -107,9 +140,15 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
             </button>
             {productOpen && (
               <div className="pl-4 mt-2 space-y-2">
-                <Link href="/products" className="block">Decore Items</Link>
-                <Link href="/products/lighting" className="block">Lighting</Link>
-                <Link href="/products/decor" className="block">Decor</Link>
+                <Link href="/products" className="block">
+                  Decore Items
+                </Link>
+                <Link href="/products/lighting" className="block">
+                  Lighting
+                </Link>
+                <Link href="/products/decor" className="block">
+                  Decor
+                </Link>
               </div>
             )}
           </div>
@@ -117,14 +156,24 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           {/* Mobile User */}
           {isLoggedIn ? (
             <>
-              <p className="font-medium" style={{color: '#16a34a'}}>Hi, {userName}!</p>
-              <Link href="/dashboard" className="block">Dashboard</Link>
-              <button onClick={handleLogout} className="block text-red-500">Logout</button>
+              <p className="font-medium" style={{ color: "#16a34a" }}>
+                Hi, {userName}!
+              </p>
+              <Link href="/dashboard" className="block">
+                Dashboard
+              </Link>
+              <button onClick={handleLogout} className="block text-red-500">
+                Logout
+              </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="block">Login</Link>
-              <Link href="/signup" className="block">Sign Up</Link>
+              <Link href="/login" className="block">
+                Login
+              </Link>
+              <Link href="/signup" className="block">
+                Sign Up
+              </Link>
             </>
           )}
         </div>
