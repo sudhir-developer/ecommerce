@@ -8,15 +8,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # All secrets available to every step in this job
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+      NEXT_PUBLIC_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUD_NAME }}
+      NEXT_PUBLIC_UPLOAD_PRESET: ${{ secrets.NEXT_PUBLIC_UPLOAD_PRESET }}
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
 
       - name: Install Dependencies
         run: npm ci
@@ -26,8 +36,6 @@ jobs:
 
       - name: Build Project
         run: npm run build
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
       - name: Run Tests
         run: npm test --if-present
